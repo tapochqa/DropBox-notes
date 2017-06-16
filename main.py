@@ -10,9 +10,7 @@ from datetime import datetime
 with open ('token', 'r') as token:
     oauth_token = token.readline()
 
-print 'Connecting to DB...'
 dbx = dropbox.Dropbox(oauth_token)
-print 'Done.'
 
 def clean_db_folder():
     dbx.files_delete('/Notes')
