@@ -3,7 +3,7 @@
 
 import wx
 import wx.xrc
-
+import os
 import main
 import glob
 import editor
@@ -112,8 +112,12 @@ class Notelist ( wx.Frame ):
 		main.create_new_note(self.note_name.GetValue())
 		self.note_list.Append(self.note_name.GetValue())
 		self.note_name.SetValue('')
+		
 	def delete_note( self, event ):
-		event.Skip()
+		k = self.note_list.GetString(self.note_list.GetSelection())
+		path = '.\Notes\kek'[0:8]+k+'.txt'
+		os.remove(path)
+		self.note_list.Delete(self.note_list.GetSelection())
 	
 	def upload( self, event ):
 		self.list_bar.SetStatusText('Uploading...')

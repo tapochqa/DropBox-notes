@@ -63,7 +63,7 @@ class Editor ( wx.Frame ):
 	
 	def save_note( self, event ):
 		with open ('.\Notes\kek'[0:8]+self.notename+'.txt', 'w') as notesave:
-			notesave.write(self.note.GetValue())
+			notesave.write(self.note.GetValue().encode('utf-8'))
 		self.statusbar.SetStatusText('Saved')
 	
 
