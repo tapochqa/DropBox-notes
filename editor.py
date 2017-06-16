@@ -49,6 +49,9 @@ class Editor ( wx.Frame ):
 		self.Bind( wx.EVT_KEY_DOWN, self.check_save )
 		self.note.Bind( wx.EVT_TEXT, self.statsrefresh )
 		self.Bind( wx.EVT_MENU, self.save_note, id = self.save_btn.GetId() )
+		
+		self.statusbar.SetStatusText(str(len(self.note.GetValue())) + ' symbols'+ ' | ' + str(len(self.note.GetValue().replace(' ', '')))+ ' symbols')		
+		
 		self.Show(True)
 	def __del__( self ):
 		pass
@@ -62,7 +65,7 @@ class Editor ( wx.Frame ):
 		event.Skip()
 	
 	def statsrefresh( self, event ):
-		self.statusbar.SetStatusText(str(len(self.note.GetValue())) + ' symbols')
+		self.statusbar.SetStatusText(str(len(self.note.GetValue())) + ' symbols'+ ' | ' + str(len(self.note.GetValue().replace(' ', '')))+ ' symbols')
 	
 	def save_note( self, event ):
 		with open ('.\Notes\kek'[0:8]+self.notename+'.txt', 'w') as notesave:
