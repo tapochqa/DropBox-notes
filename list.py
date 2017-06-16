@@ -125,8 +125,17 @@ class Notelist ( wx.Frame ):
 			self.list_bar.SetStatusText('Uploaded')
 	
 	def download( self, event ):
-		event.Skip()
-
+		self.note_list.Clear()
+		self.list_bar.SetStatusText('Downloading')
+		try:
+			
+			main.download()
+			for note in glob.glob('.\Notes\*.txt'):
+				self.note_list.Append(note.replace('.\Notes\kek'[0:8], '').replace('.txt', ''))
+		except Exception:
+			self.list_bar.SetStatusText('Failed')
+		else:
+			self.list_bar.SetStatusText('Downloaded')
 list = wx.App()
 Notelist(None)
 list.MainLoop()
