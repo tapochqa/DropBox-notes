@@ -28,7 +28,7 @@ def create_new_note(title):
         if path == title+'.txt':
             raise Exception, 'OSHbIBKA, TAKAR ZAMETKA YZHE EST!'
     
-    with open ('Notes/'+title+'.txt', 'w') as note:
+    with open ('.\Notes\kek'[0:8]+title+'.txt', 'w') as note:
                 date = datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S")
                 note.write(date)
 
