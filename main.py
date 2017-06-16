@@ -1,4 +1,5 @@
 import dropbox
+import glob
 from dropbox.files import WriteMode
 import sys
 
@@ -8,5 +9,13 @@ with open ('token', 'r') as token:
 
 dbx = dropbox.Dropbox(oauth_token)
 
-with open ('check.txt', 'rb') as ofile:
-    dbx.files_upload(ofile.read(), '/check.txt', mode = WriteMode('overwrite'))
+def upload():
+    all_files = glob.glob('./Notes/*.txt')
+    for every_file in all_files:
+        with open (every_file, 'rb') as each_file:
+            k = each_file.read()
+            print k
+        
+upload()
+#def download():
+    
