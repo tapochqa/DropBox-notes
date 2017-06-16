@@ -5,7 +5,7 @@ sys.setdefaultencoding('utf8')
 
 import wx
 import wx.xrc
-
+import dialog
 
 class Editor ( wx.Frame ):
 	
@@ -50,7 +50,7 @@ class Editor ( wx.Frame ):
 		self.note.Bind( wx.EVT_TEXT, self.statsrefresh )
 		self.Bind( wx.EVT_MENU, self.save_note, id = self.save_btn.GetId() )
 		
-		self.statusbar.SetStatusText(str(len(self.note.GetValue())) + ' symbols'+ ' | ' + str(len(self.note.GetValue().replace(' ', '')))+ ' symbols')		
+		self.statusbar.SetStatusText('Saved')
 		
 		self.Show(True)
 	def __del__( self ):
@@ -58,8 +58,22 @@ class Editor ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
+	
 	def save_question( self, event ):
-		event.Skip()
+		a = self.statusbar.GetStatusText()
+		if a != 'Saved':
+			ret  = wx.MessageBox('Save file?', 'Question', 
+			wx.YES_NO | wx.NO_DEFAULT, self)
+			
+			if ret == wx.YES:
+				with open ('.\Notes\kek'[0:8]+self.notename+'.txt', 'w') as notesave:
+					notesave.write(self.note.GetValue().encode('utf-8'))
+				self.Destroy() 
+			if ret == wx.NO:
+				self.Destroy()
+			
+		else: self.Destroy()
+		
 	
 	def check_save( self, event ):
 		event.Skip()
@@ -71,5 +85,6 @@ class Editor ( wx.Frame ):
 		with open ('.\Notes\kek'[0:8]+self.notename+'.txt', 'w') as notesave:
 			notesave.write(self.note.GetValue().encode('utf-8'))
 		self.statusbar.SetStatusText('Saved')
+		
 	
 

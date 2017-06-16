@@ -118,7 +118,6 @@ class Notelist ( wx.Frame ):
 		path = '.\Notes\kek'[0:8]+k+'.txt'
 		os.remove(path)
 		self.note_list.Delete(self.note_list.GetSelection())
-	
 	def upload( self, event ):
 		self.list_bar.SetStatusText('Uploading...')
 		try:
