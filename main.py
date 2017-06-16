@@ -29,7 +29,10 @@ def create_new_note(title):
     with open ('Notes/'+title+'.txt', 'w') as note:
                 date = datetime.strftime(datetime.now(), "%Y.%m.%d %H:%M:%S")
                 note.write(date)
-        
+
+def delete_note(title):
+    os.remove(title+'.txt')
+
 
 def upload():
     try:
@@ -54,6 +57,3 @@ def download():
         spath = '.\Notes\kek'[0:8]+entrie.name
         print spath
         dbx.files_download_to_file(download_path = spath, path = spath.replace('\k'[0], '/').replace('.', '', 1))
-
-    
-download()
