@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import dropbox
 import glob
 from dropbox.files import WriteMode
@@ -9,13 +10,17 @@ with open ('token', 'r') as token:
 
 dbx = dropbox.Dropbox(oauth_token)
 
+
+
 def upload():
-    all_files = glob.glob('./Notes/*.txt')
+    all_files = glob.glob('.\Notes\*.txt')
     for every_file in all_files:
         with open (every_file, 'rb') as each_file:
-            k = each_file.read()
-            print k
+            fpath = every_file.replace('.', '', 1)
+            fpath = fpath.replace('\l'[0], '/')
+            dbx.files_upload(each_file.read(), fpath, mode=WriteMode('overwrite'))
         
-upload()
+
+
 #def download():
     
