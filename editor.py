@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*- 
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 import wx
 import wx.xrc
@@ -21,7 +23,8 @@ class Editor ( wx.Frame ):
 		self.note.SetBackgroundColour( wx.Colour( 213, 213, 255 ) )
 		self.note.SetMinSize( wx.Size( -1,5000 ) )
 		with open ('.\Notes\kek'[0:8]+note_name+'.txt', 'r') as note_op:
-			self.note.SetValue(note_op.read())
+			k = note_op.read()
+			self.note.SetValue(unicode(k.encode('utf-8')))
 		
 		bSizer2.Add( self.note, 0, wx.ALL|wx.EXPAND, 5 )
 		
